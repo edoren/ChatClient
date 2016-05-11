@@ -4,14 +4,35 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
     <link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css" >
+    <link rel="stylesheet" href="./css/style.css" >
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" src="../node_modules/hammerjs/hammer.min.js"></script>
     <script type="text/javascript" src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and <script>document.write(process.versions.electron)</script>.
+    <div class="valign-wrapper ">
+      <div class="row valign">
+        <h1>EdoChat!</h1>
+        <form class=" col s12">
+          <div class="row">
+            <div class="input-field">
+              <i class="material-icons prefix">account_circle</i>
+              <input id="user" type="text" class="validate">
+              <label for="user">user</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field">
+              <i class="material-icons prefix">lock</i>
+              <input id="password" type="text" class="validate">
+              <label for="password">password</label>
+            </div>
+          </div>
+          <a class="waves-effect waves-light btn">Login</a>
+          <a class="waves-effect waves-light btn">Registrarse</a>
+        </form>
+      </div>
+    </div>
   </body>
 
   <script>

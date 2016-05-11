@@ -15,7 +15,7 @@ var paths = {
         "./typings/browser.d.ts"
     ],
     app_assets: [
-        "./app/*",
+        "./app/**",
         "!./app/scripts"
     ]
 }
