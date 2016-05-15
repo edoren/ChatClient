@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css" >
+    <link rel="stylesheet" href="./css/style.css" >
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="../node_modules/hammerjs/hammer.min.js"></script>
+    <script type="text/javascript" src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+  </head>
+  <body>
+      <div class="row valign">
+        <div class="col s12">
+          <div class="col s3 teal lighten-4">
+            <div class="col s12">
+              <p>ROOMS</p>
+            </div>
+            <hr>
+            <div class="col s8">
+              <p>Default</p>
+            </div>
+            <div class="col s2">
+              <i class="material-icons">clear</i>
+            </div>
+          </div>
+          <div class="col s6">
+            <div class="col 12 teal lighten-4">
+            Ventana
+            </div>
+            <div class="col 12">
+
+            </div>
+          </div>
+          <div class="col s3 teal lighten-4">
+            <div class="col s12">
+              <p>USERS</p>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+      <div class="row valign no-margin">
+        <div class="col s12">
+          <div class="col s3 ">
+            <form action="" method="post">
+              <i class="material-icons">queue</i>
+              <input class="waves-effect waves-light btn" type="submit" value="Add" />
+            </form>
+          </div>
+          <div class="col s9 teal lighten-5">
+            <form action="" method="post">
+              <div class="input-field col s10">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="textarea1" class="materialize-textarea"></textarea>
+              </div>
+              <div class="col s2">
+                <input class="waves-effect waves-light btn right" type="submit" value="Send"/>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  </body>
+
+  <script>
+    require("./scripts/main.js");
+  </script>
+
+</html>
