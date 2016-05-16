@@ -1,0 +1,11 @@
+{
+    "type": 1,
+    "contents": {
+        "name": "",
+        "last_name": "",
+        "user": "",  // la id de usuario
+        "password": "",
+        "age": "",
+        "gender": ""
+    }
+}

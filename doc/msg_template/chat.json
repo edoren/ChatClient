@@ -1,9 +1,8 @@
 {
-    "type": "chat",
+    "type": 0,
     "contents": {
         "user": "",  // la id de usuario
         "room": "",  // la id del cuarto
         "message": ""  // el mensaje a enviar
     }
 }
-
