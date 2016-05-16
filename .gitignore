@@ -1,4 +1,4 @@
-# Ingore npm folders and log files
+# Ignore npm folders and log files
 typings/
 node_modules/
 npm-debug.log
