@@ -28,7 +28,7 @@ interface UserListProps {
     data: Array<UserProps>;
 }
 
-class UserList extends React.Component<UserListProps, {}> {
+export class UserList extends React.Component<UserListProps, {}> {
     render() {
         var user_nodes = this.props.data.map(function(user) {
             return (
@@ -43,8 +43,3 @@ class UserList extends React.Component<UserListProps, {}> {
         );
     }
 }
-
-ReactDOM.render(
-    <UserList data={data}/>,
-    document.getElementById('content')
-);
