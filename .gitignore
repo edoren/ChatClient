@@ -1,4 +1,10 @@
-build
-node_modules
+# Ingore npm folders and log files
+typings/
+node_modules/
 npm-debug.log
-typings
+
+# Ignore deploy folders
+build/
+
+# Ignore all the TypeScript compiled files
+app/scripts/**/*.js
