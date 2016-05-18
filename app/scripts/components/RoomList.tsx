@@ -20,7 +20,7 @@ class Room extends React.Component <RoomProps, RoomState> {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({
             key: this.props.key,
             name: this.props.name
@@ -40,13 +40,15 @@ interface RoomListProps {
 
 interface RoomListState {
     data?: Array<RoomProps>;
+    tmp?: string;
 }
 
 export class RoomList extends React.Component <RoomListProps, RoomListState> {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            tmp: ""
         }
     }
 
@@ -65,26 +67,38 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
         });
     }
 
-    addRoom() {
+    addRoom(ev) {
         var data = this.state.data;
-        data.push({
-            key: Math.floor(Math.random() * 100),
-            name: "Room " + this.makeId(3)
+        var name = this.state.tmp;
+        var id = Math.floor(Math.random() * 100);
+        name = (name == "")? "Room " + (id).toString() : name;
+        var ok = true;
+
+        data.forEach(function(room) {
+            if (room.name == name) {
+                alert(`Ya existe una sala con el nombre "${name}", por favor elige otro nombre`);
+                ok = false;
+                return;
+            }
         });
 
-        this.setState({
-            data: data
-        });
+        if (ok) {
+            data.push({
+                key: id,
+                name: name
+            });
+
+            this.setState({
+                data: data,
+                tmp: ""
+            });
+        }
     }
 
-    makeId(n) {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-        for (var i = 0; i < n; i++)
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-        return text;
+    editName(ev) {
+        this.setState({
+            tmp: ev.target.value
+        });
     }
 
     render() {
@@ -100,6 +114,7 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
         return (
             <div>
                 <ul>{rooms}</ul>
+                <input type="text" placeholder="Room Name" value={this.state.tmp} onChange={this.editName.bind(this)}/>
                 <button onClick={this.addRoom.bind(this)}>ADD</button>
             </div>
         );

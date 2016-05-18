@@ -50,7 +50,7 @@ export class UserList extends React.Component <UserListProps, UserListState> {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({
             data: this.props.data
         });
