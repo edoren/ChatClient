@@ -5,11 +5,11 @@ var BSON = new bson.BSONPure.BSON();
 
 export class Message {
     type: any;
-    contents: { any };
+    content: any;
 
-    constructor(type: any, contents: any) {
+    constructor(type: any, content: any) {
         this.type = type;
-        this.contents = contents;
+        this.content = content;
     }
 
     static Encode(msg: Message) {
@@ -19,8 +19,8 @@ export class Message {
 
     static Decode(data: Buffer): Message {
         var obj = BSON.deserialize(data);
-        if ("type" in obj && "contents" in obj) {
-            return new Message(obj.type, obj.contents);
+        if ("type" in obj && "content" in obj) {
+            return new Message(obj.type, obj.content);
         }
     }
 }
