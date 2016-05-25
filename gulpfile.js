@@ -16,7 +16,7 @@ var paths = {
     ],
     app_assets: [
         "./app/**",
-        "!./app/scripts"
+        "!./app/scripts/**"
     ]
 }
 
