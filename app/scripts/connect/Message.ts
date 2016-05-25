@@ -13,14 +13,20 @@ export class Message {
     }
 
     static Encode(msg: Message) {
-        var data = BSON.serialize(msg, false, true, false);
-        return data;
+        var obj;
+        if (msg.content == undefined) {
+            obj = { type: msg.type }
+        } else {
+            obj = { type: msg.type, content: msg.content }
+        }
+        return BSON.serialize(obj, false, true, false);
     }
 
     static Decode(data: Buffer): Message {
         var obj = BSON.deserialize(data);
-        if ("type" in obj && "content" in obj) {
+        if ("type" in obj) {
             return new Message(obj.type, obj.content);
         }
+        return null
     }
 }
