@@ -129,4 +129,51 @@ Los mensajes de actualizacion los envia el servidor periodicamente ya sea para
 notificarle al usuario un mensaje nuevo que ha llegado o actualizar la lista
 de usuarios en un cuarto.
 
-### TODO
+### RESPONSE [id = 100]
+Repuesta enviada por el servidor despues de haber recibido alguna petición del
+cliente, tiene el siguiente contenido:
+
+- **msg_id**: la id del mensaje al cual se está respondiendo. (number)
+- **code**: el codigo de estado de la respuesta, un valor diferente a 0
+significa un fallo en la operación.
+
+#### Codigos de respuesta
+Los codigos de status para cada mensaje son:
+
+- **OK [id = 0]:** cuando la peticion se pudo hacer exitosamente.
+- **INVALID_CONTENT [id = 1]:** si la peticion que se envió no contiene.
+los datos requeridos o alguno de ellos está vacio.
+- **INVALID_USERNAME [id = 2]:** si el `user` no es un valor valido, usado
+por REGISTER.
+- **INVALID_LOGIN_INFO [id = 3]:** si se ingresa el usuario o contraseña
+incorrectamente, usado por LOGIN.
+- **USER_ALREADY_REGISTERED [id = 4]:** si el usuario ya está registrado, usado
+por REGISTER.
+- **ROOM_ALREADY_CREATED [id = 5]:** cuando ya existe un room con ese nombre,
+usado por CREATE_ROOM.
+- **NON_EXISTING_USER [id = 6]:** si el usuario no existe, usado por
+CREATE_ROOM y REMOVE_ROOM.
+- **NON_EXISTING_ROOM [id = 7]:** si el cuarto no exite, usado por
+CREATE_ROOM y REMOVE_ROOM.
+- **NOT_ROOM_OWNER [id = 8]:** cuando el `owner` no es el propietario del Room,
+usado por REMOVE_ROOM.
+
+Ejemplos:
+```json
+{
+    "type": 100,
+    "content": {
+        "msg_id": 1,  // Respuesta a un mensaje LOGIN
+        "code": 0     // Codigo de respuesta OK
+    }
+}
+```
+```json
+{
+    "type": 100,
+    "content": {
+        "msg_id": 1,  // Respuesta a un mensaje LOGIN
+        "code": 3     // Codigo de respuesta INVALID_LOGIN_INFO
+    }
+}
+```
