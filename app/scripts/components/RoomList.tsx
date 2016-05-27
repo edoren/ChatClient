@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import {Button} from 'react-materialize';
 
 interface RoomProps {
     key: number;
@@ -105,17 +106,21 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
         var rooms = this.state.data.map((room, index) => {
             return (
                 <li>
-                    <Room key={room.key} name={room.name}/>
-                    <label id={room.key} onClick={this.removeRoom.bind(this, index)}>X</label>
+                    <label><Room key={room.key} name={room.name}/></label>
+                    <label className="exit" onClick={this.removeRoom.bind(this, index)}>X</label>
                 </li>
             );
         });
 
         return (
             <div>
-                <ul>{rooms}</ul>
-                <input type="text" placeholder="Room Name" value={this.state.tmp} onChange={this.editName.bind(this)}/>
-                <button onClick={this.addRoom.bind(this)}>ADD</button>
+                <div className>
+                    <ul>{rooms}</ul>
+                    <input type="text" placeholder="Room Name" value={this.state.tmp} onChange={this.editName.bind(this)}/>
+                </div>
+                <div className="row center">
+                    <Button onClick={this.addRoom.bind(this)} className="waves-effect waves-light">ADD</Button>
+                </div>
             </div>
         );
     }

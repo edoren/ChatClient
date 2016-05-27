@@ -50,3 +50,10 @@ html, body {
   margin-bottom: auto;
 }
 
+.exit {
+  color: black;
+}
+
+.exit:hover {
+  color: gray;
+}

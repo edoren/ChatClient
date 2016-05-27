@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import {Icon} from 'react-materialize';
 
 interface UserProps {
     key: string;
@@ -91,8 +92,8 @@ export class UserList extends React.Component <UserListProps, UserListState> {
         var users = this.state.data.map((user, index) => {
             return (
                 <li>
+                    <Icon>account_circle</Icon>&nbsp;
                     <User key={user.key} name={user.name}/>
-                    <label id={user.key} onClick={this.removeUser.bind(this, index)}>X</label>
                 </li>
             );
         });
@@ -100,7 +101,6 @@ export class UserList extends React.Component <UserListProps, UserListState> {
         return (
             <div>
                 <ul>{users}</ul>
-                <button onClick={this.addUser.bind(this)}>ADD</button>
             </div>
         );
     }
