@@ -1,7 +1,0 @@
-{
-    "type": 3,
-    "contents": {
-        "admin": "",  // la id de usuario
-        "room": ""  // la id del cuarto
-    }
-}

@@ -5,22 +5,28 @@ var BSON = new bson.BSONPure.BSON();
 
 export class Message {
     type: any;
-    contents: { any };
+    content: any;
 
-    constructor(type: any, contents: any) {
+    constructor(type: any, content: any) {
         this.type = type;
-        this.contents = contents;
+        this.content = content;
     }
 
     static Encode(msg: Message) {
-        var data = BSON.serialize(msg, false, true, false);
-        return data;
+        var obj;
+        if (msg.content == undefined) {
+            obj = { type: msg.type }
+        } else {
+            obj = { type: msg.type, content: msg.content }
+        }
+        return BSON.serialize(obj, false, true, false);
     }
 
     static Decode(data: Buffer): Message {
         var obj = BSON.deserialize(data);
-        if ("type" in obj && "contents" in obj) {
-            return new Message(obj.type, obj.contents);
+        if ("type" in obj) {
+            return new Message(obj.type, obj.content);
         }
+        return null
     }
 }
