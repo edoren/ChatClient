@@ -1,9 +1,6 @@
 var electron = require("electron");  // Module to control application life.
 var BrowserWindow = require("browser-window");  // Module to create native browser window.
-
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-var mainWindow = null;
+var ipc = require("ipc");
 
 // Quit when all windows are closed.
 electron.app.on('window-all-closed', function() {
@@ -14,29 +11,45 @@ electron.app.on('window-all-closed', function() {
     }
 });
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
 electron.app.on("ready", function() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({
+    loginWindow = new BrowserWindow({
         "width": 600,
         "height": 450,
         "minWidth": 600,
         "minHeight": 450
     });
+    loginWindow.loadURL('file://' + __dirname + '/index.html');
 
-    // and load the index.html of the app.
-    mainWindow.loadURL("file://" + __dirname + "/chat.html");
-    //mainWindow.loadURL("file://" + __dirname + "/react_test.html");
+    registerWindow = new BrowserWindow({
+        "width": 600,
+        "height": 450,
+        "minWidth": 600,
+        "minHeight": 450,
+        "show": false
+    });
+    registerWindow.loadURL('file://' + __dirname + '/register.html');
 
-    // Open the DevTools.
-    //mainWindow.openDevTools();
+    chatWindow = new BrowserWindow({
+        "width": 600,
+        "height": 450,
+        "minWidth": 600,
+        "minHeight": 450,
+        "show": false
+    });
+    chatWindow.loadURL('file://' + __dirname + '/chat.html');
 
-    // Emitted when the window is closed.
-    mainWindow.on("closed", function() {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        mainWindow = null;
+    roomWindow = new BrowserWindow({
+        "width": 600,
+        "height": 450,
+        "minWidth": 600,
+        "minHeight": 450,
+        "show": false
+    });
+    roomWindow.loadURL('file://' + __dirname + '/chat.html');
+
+    ipc.on('register', function() {
+        registerWindow.show();
+        loginWindow.hide();
     });
 });

@@ -29,14 +29,16 @@
             </div>
           </div>
           <a class="waves-effect waves-light btn">Login</a>
-          <a class="waves-effect waves-light btn">Registrarse</a>
+          <a class="waves-effect waves-light btn" id="register">Registrarse</a>
         </form>
       </div>
     </div>
   </body>
-
   <script>
-    require("./scripts/main.js");
+    var ipc = require('ipc');
+    var btn = document.getElementById('register');
+    btn.addEventListener('click', function() {
+      ipc.send('user-register');
+    });
   </script>
-
 </html>
