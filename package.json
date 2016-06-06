@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "gulp start",
-    "install": "typings install",
+    "install": "rm -rf typings && typings install",
     "debug": "gulp debug",
     "watch": "gulp watch",
     "compile": "gulp compile"
@@ -25,6 +25,6 @@
     "gulp-run-electron": "^1.2.2",
     "gulp-typescript": "^2.13.3",
     "typescript": "^1.8.10",
-    "typings": "^0.8.1"
+    "typings": "^1.0.0"
   }
 }

@@ -1,8 +1,9 @@
 {
-  "ambientDependencies": {
+  "globalDependencies": {
     "bson": "registry:dt/bson#0.4.21+20160317120654",
-    "node": "registry:dt/node#4.0.0+20160501135006",
-    "react": "registry:dt/react#0.14.0+20160423065914",
+    "electron": "registry:env/electron#0.37.6+20160416165306",
+    "node": "registry:dt/node#6.0.0+20160602155235",
+    "react": "registry:dt/react#0.14.0+20160602151522",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040"
   }
 }
