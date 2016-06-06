@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
-    <link rel="stylesheet" href="../node_modules/materialize-css/dist/css/materialize.min.css" >
-    <link rel="stylesheet" href="./css/style.css" >
+    <link rel="stylesheet" href="../../node_modules/materialize-css/dist/css/materialize.min.css" >
+    <link rel="stylesheet" href="../css/style.css" >
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script type="text/javascript" src="../node_modules/hammerjs/hammer.min.js"></script>
-    <script type="text/javascript" src="../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/hammerjs/hammer.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
   </head>
   <body>
     <div class="valign-wrapper background-Center">
@@ -35,10 +35,6 @@
     </div>
   </body>
   <script>
-    var ipc = require('ipc');
-    var btn = document.getElementById('register');
-    btn.addEventListener('click', function() {
-      ipc.send('user-register');
-    });
+    require("../scripts/login_controller.js")
   </script>
 </html>

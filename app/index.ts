@@ -1,6 +1,4 @@
-var electron = require("electron");  // Module to control application life.
-var BrowserWindow = require("browser-window");  // Module to create native browser window.
-var ipc = require("ipc");
+import * as electron from 'electron';  // Module to control application life.
 
 // Quit when all windows are closed.
 electron.app.on('window-all-closed', function() {
@@ -13,43 +11,45 @@ electron.app.on('window-all-closed', function() {
 
 electron.app.on("ready", function() {
     // Create the browser window.
-    loginWindow = new BrowserWindow({
+    var loginWindow = new electron.BrowserWindow({
         "width": 600,
         "height": 450,
         "minWidth": 600,
         "minHeight": 450
     });
-    loginWindow.loadURL('file://' + __dirname + '/index.html');
+    loginWindow.loadURL('file://' + __dirname + '/views/login.html');
 
-    registerWindow = new BrowserWindow({
+    var registerWindow = new electron.BrowserWindow({
         "width": 600,
         "height": 450,
         "minWidth": 600,
         "minHeight": 450,
         "show": false
     });
-    registerWindow.loadURL('file://' + __dirname + '/register.html');
+    registerWindow.loadURL('file://' + __dirname + '/views/register.html');
 
-    chatWindow = new BrowserWindow({
+    var chatWindow = new electron.BrowserWindow({
         "width": 600,
         "height": 450,
         "minWidth": 600,
         "minHeight": 450,
         "show": false
     });
-    chatWindow.loadURL('file://' + __dirname + '/chat.html');
+    chatWindow.loadURL('file://' + __dirname + '/views/chat.html');
 
-    roomWindow = new BrowserWindow({
+    var roomWindow = new electron.BrowserWindow({
         "width": 600,
         "height": 450,
         "minWidth": 600,
         "minHeight": 450,
         "show": false
     });
-    roomWindow.loadURL('file://' + __dirname + '/chat.html');
 
-    ipc.on('register', function() {
-        registerWindow.show();
-        loginWindow.hide();
+    roomWindow.loadURL('file://' + __dirname + '/views/chat.html');
+
+    electron.ipcMain.on('user-register', function(event, arg) {
+        loginWindow.loadURL('file://' + __dirname + '/views/register.html');
+        // registerWindow.show();
+        // loginWindow.hide();
     });
 });
