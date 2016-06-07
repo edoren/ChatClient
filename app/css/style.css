@@ -57,3 +57,20 @@ html, body {
 .exit:hover {
   color: gray;
 }
+
+ul li {
+  text-decoration: none;
+  word-break: break-all;
+}
+
+#chat li:nth-child(odd) {
+  background-color: #E0F7FA;
+}
+
+#chat li:nth-child(even) {
+  background-color: #B2DFDB;
+}
+
+.bold {
+  font-weight: bold;
+}

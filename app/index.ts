@@ -10,21 +10,21 @@ electron.app.on('window-all-closed', () => {
 electron.app.on("ready", () => {
     // Create the browser window.
     var mainWindow = new electron.BrowserWindow({
-        "width": 640,
-        "height": 480,
-        "minWidth": 640,
-        "minHeight": 480
+        "width": 920,
+        "height": 550,
+        "minWidth": 920,
+        "minHeight": 550
     });
 
     var registerWindow = new electron.BrowserWindow({
-        "width": 640,
-        "height": 480,
-        "minWidth": 640,
-        "minHeight": 480,
+        "width": 920,
+        "height": 550,
+        "minWidth": 920,
+        "minHeight": 550,
         "show": false
     });
 
-    mainWindow.loadURL('file://' + __dirname + '/views/login.html');
+    mainWindow.loadURL('file://' + __dirname + '/views/chat.html');
     registerWindow.loadURL('file://' + __dirname + '/views/register.html');
 
     electron.ipcMain.on('loadWindow', (event, arg) => {

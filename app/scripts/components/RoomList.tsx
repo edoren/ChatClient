@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Button} from 'react-materialize';
+import {Button, Icon} from 'react-materialize';
 
 interface RoomProps {
     key: number;
@@ -106,6 +106,7 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
         var rooms = this.state.data.map((room, index) => {
             return (
                 <li>
+                    <Icon>home</Icon>
                     <label><Room key={room.key} name={room.name}/></label>
                     <label className="exit" onClick={this.removeRoom.bind(this, index)}>X</label>
                 </li>

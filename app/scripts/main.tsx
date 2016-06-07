@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as connect from "./connect";
-import {UserList, RoomList, MyInput} from './components';
+import {UserList, RoomList} from './components';
 
 var users_data = [
     { key: "abc", name: "Pete Hunt" },
@@ -26,11 +26,6 @@ ReactDOM.render(
     <UserList data={users_data}/>,
     document.getElementById('users')
 );
-
-/* ReactDOM.render(
-    <MyInput text="Hola Mundo"/>,
-    document.getElementById('test-input')
-);*/
 
 /*var socket = new connect.SocketManager();
 socket.on("receive", function(msg) {
