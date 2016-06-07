@@ -2,7 +2,6 @@ import * as net from "net";
 import * as events from "events";
 import {Message} from "./Message"
 
-
 export class SocketManager extends events.EventEmitter {
     address: { host: string; port: number };
     socket: net.Socket;

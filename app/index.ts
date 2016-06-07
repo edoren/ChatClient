@@ -10,17 +10,17 @@ electron.app.on('window-all-closed', () => {
 electron.app.on("ready", () => {
     // Create the browser window.
     var mainWindow = new electron.BrowserWindow({
-        "width": 600,
-        "height": 450,
-        "minWidth": 600,
-        "minHeight": 450
+        "width": 640,
+        "height": 480,
+        "minWidth": 640,
+        "minHeight": 480
     });
 
     var registerWindow = new electron.BrowserWindow({
-        "width": 600,
-        "height": 450,
-        "minWidth": 600,
-        "minHeight": 450,
+        "width": 640,
+        "height": 480,
+        "minWidth": 640,
+        "minHeight": 480,
         "show": false
     });
 
@@ -35,6 +35,11 @@ electron.app.on("ready", () => {
                 break;
             case 2:
                 registerWindow.hide();
+                mainWindow.show();
+                break;
+            case 3:
+                registerWindow.hide();
+                mainWindow.loadURL('file://' + __dirname + '/views/chat.html');
                 mainWindow.show();
                 break;
             default:

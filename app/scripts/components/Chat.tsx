@@ -5,7 +5,7 @@ interface MyState {
     text: string
 }
 
-export class MyInput extends React.Component <MyState, MyState> {
+export class Chat extends React.Component <MyState, MyState> {
     constructor(props) {
         super(props);
         this.state = {
