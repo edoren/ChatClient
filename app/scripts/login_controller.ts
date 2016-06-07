@@ -15,6 +15,12 @@ $(function() {
 
         //alert(JSON.stringify(data));
         var socket = new connect.SocketManager();
+        socket.Connect("190.128.55.241", 9999);
+        //socket.Connect("localhost", 9999);
+
+        var msg = new connect.Message(connect.MessageType.LOGIN, data);
+        socket.Send(msg);
+
         socket.on("receive", function(msg) {
             console.log(msg);
             if (msg.type == connect.MessageType.RESPONSE) {
@@ -30,11 +36,5 @@ $(function() {
                 console.log("Codigo de respuesta:", connect.ResponseCode[msg.content.code]);
             }
         });
-
-        socket.Connect("190.128.55.241", 9999);
-        //socket.Connect("localhost", 9999);
-
-        var msg = new connect.Message(connect.MessageType.LOGIN, data);
-        socket.Send(msg);
     });
 });
