@@ -1,31 +1,33 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as connect from "./connect";
-import {UserList, RoomList} from './components';
+import {UserList, RoomList, Room} from './components';
+import * as $ from 'jquery';
 
-var users_data = [
-    { key: "abc", name: "Pete Hunt" },
-    { key: "123", name: "Jordan Walke" },
-    { key: "cba", name: "Sebas Duque" },
-    { key: "321", name: "Manuel Sabogal" },
-    { key: "1ab", name: "Caro Gomez" }
-];
+var users_data = [];
+var rooms_data = [];
 
-var rooms_data = [
-    { key: 1, name: "Room A" },
-    { key: 2, name: "Room B" },
-    { key: 3, name: "Room C" }
-];
+$(function() {
+    $.getJSON('../../tmp/rooms.json', (data) => {
+        rooms_data = data.rooms;
+        ReactDOM.render(
+            <RoomList data={rooms_data}/>,
+            document.getElementById('rooms')
+        );
+        // ReactDOM.render(
+        //     <Room data={rooms_data}/>,
+        //     document.getElementById('room')
+        // );
+    });
 
-ReactDOM.render(
-    <RoomList data={rooms_data}/>,
-    document.getElementById('rooms')
-);
-
-ReactDOM.render(
-    <UserList data={users_data}/>,
-    document.getElementById('users')
-);
+    $.getJSON('../../tmp/users.json', (data) => {
+        users_data = data.users;
+        ReactDOM.render(
+            <UserList data={users_data}/>,
+            document.getElementById('users')
+        );
+    });
+});
 
 /*var socket = new connect.SocketManager();
 socket.on("receive", function(msg) {

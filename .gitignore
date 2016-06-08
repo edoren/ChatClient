@@ -9,3 +9,7 @@ build/
 # Ignore all the TypeScript compiled files
 app/scripts/**/*.js
 app/*.js
+
+# Ignore folder tmp
+tmp/
+tmp2/

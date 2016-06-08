@@ -1,5 +1,7 @@
 import * as connect from './connect';
 import * as $ from 'jquery';
+import * as fs from 'fs';
+import {SocketConnection} from './socket_connection';
 import {ipcRenderer} from 'electron';  // Module to control application life.
 
 $(function() {
@@ -14,27 +16,38 @@ $(function() {
         };
 
         //alert(JSON.stringify(data));
-        var socket = new connect.SocketManager();
-        socket.Connect("190.128.55.241", 9999);
-        //socket.Connect("localhost", 9999);
-
-        var msg = new connect.Message(connect.MessageType.LOGIN, data);
-        socket.Send(msg);
+        var socket = SocketConnection.getInstance();
 
         socket.on("receive", function(msg) {
             console.log(msg);
+            //alert(JSON.stringify(msg));
             if (msg.type == connect.MessageType.RESPONSE) {
-                if (connect.MessageType[msg.content.msg_id] == "3") {
+                if (msg.content.code == connect.ResponseCode.INVALID_LOGIN_INFO) {
                     ipcRenderer.send('loadWindow', 2);
                     alert("Los datos ingresados no son correctos!");
                 }
                 else {
+                    var user = {"user": data.user};
+                    var rooms = {
+                        "rooms": [
+                            { key: 1, name: "Room A" },
+                            { key: 2, name: "Room B" },
+                            { key: 3, name: "Room C" }
+                        ]
+                    };
+
                     ipcRenderer.send('loadWindow', 3);
+                    fs.writeFile('./tmp/data.json', JSON.stringify(user, null, 4));
+                    fs.writeFile('./tmp/rooms.json', JSON.stringify(rooms, null, 4));
                 }
 
                 console.log("Respuesta para:", connect.MessageType[msg.content.msg_id]);
                 console.log("Codigo de respuesta:", connect.ResponseCode[msg.content.code]);
             }
         });
+
+        var msg = new connect.Message(connect.MessageType.LOGIN, data);
+        socket.Send(msg);
+
     });
 });

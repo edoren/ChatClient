@@ -13,7 +13,7 @@ interface RoomState {
     name?: string;
 }
 
-class Room extends React.Component <RoomProps, RoomState> {
+class RoomTmp extends React.Component <RoomProps, RoomState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -45,7 +45,7 @@ interface RoomListState {
     tmp?: string;
 }
 
-export class RoomList extends React.Component <RoomListProps, RoomListState> {
+export class Room extends React.Component <RoomListProps, RoomListState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -110,7 +110,7 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
             return (
                 <li>
                     <Icon>home</Icon>
-                    <label><Room key={room.key} name={room.name}/></label>
+                    <label><RoomTmp key={room.key} name={room.name}/></label>
                     <label className="exit" onClick={this.removeRoom.bind(this, index)}>X</label>
                 </li>
             );
@@ -123,7 +123,7 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
                     <input type="text" placeholder="Room Name" value={this.state.tmp} onChange={this.editName.bind(this)}/>
                 </div>
                 <div className="row center">
-                    <Button onClick={this.addRoom.bind(this)} className="waves-effect waves-light">ADD</Button>
+                    <Button onClick={this.addRoom.bind(this)} className="waves-effect waves-light">EXIT</Button>
                 </div>
             </div>
         );

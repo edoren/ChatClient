@@ -1,5 +1,6 @@
 import * as $ from 'jquery';
 import * as connect from './connect';
+import {SocketConnection} from './socket_connection';
 import {ipcRenderer} from 'electron';
 
 $(function() {
@@ -18,21 +19,15 @@ $(function() {
             "gender": gender
         };
 
-        var socket = new connect.SocketManager();
-        socket.Connect("190.128.55.241", 9999);
-        //socket.Connect("localhost", 9999);
-
-        var msg = new connect.Message(connect.MessageType.REGISTER, data);
-        socket.Send(msg);
-
+        var socket = SocketConnection.getInstance();
         socket.on("receive", function(msg) {
             console.log(msg);
             if (msg.type == connect.MessageType.RESPONSE) {
-                if (connect.MessageType[msg.content.msg_id] == "2") {
+                if (msg.content.code == connect.ResponseCode.INVALID_USERNAME) {
                     ipcRenderer.send('loadWindow', 1);
                     alert("El user no tiene un valor valido!");
                 }
-                else if (connect.MessageType[msg.content.msg_id] == "4") {
+                else if (msg.content.code == connect.ResponseCode.USER_ALREADY_REGISTERED) {
                     ipcRenderer.send('loadWindow', 1);
                     alert("El usuario ya se encuentra registrado!");
                 }
@@ -44,5 +39,9 @@ $(function() {
                 console.log("Codigo de respuesta:", connect.ResponseCode[msg.content.code]);
             }
         });
+
+        var msg = new connect.Message(connect.MessageType.REGISTER, data);
+        socket.Send(msg);
+
     });
 });

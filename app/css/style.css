@@ -75,3 +75,45 @@ ul li {
   font-weight: bold;
   font-family: black;
 }
+
+.fix {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 0;
+}
+
+@media screen and (min-height: 550px) {
+  .fix-chat {
+    overflow-y: scroll;
+    height: 370px;
+  }
+
+  .fix-right {
+    overflow-y: scroll;
+    height: 370px;
+  }
+
+  .fix-left {
+    overflow-y: scroll;
+    height: 370px;
+  }
+}
+
+@media screen and (min-height: 551px) {
+  .fix-chat {
+    overflow-y: scroll;
+    height: 500px;
+  }
+
+  .fix-right {
+    overflow-y: scroll;
+    height: 500px;
+  }
+
+  .fix-left {
+    overflow-y: scroll;
+    height: 500px;
+  }
+}

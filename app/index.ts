@@ -1,4 +1,6 @@
 import * as electron from 'electron';  // Module to control application life.
+import * as fs from 'fs';
+import * as rimraf from 'rimraf';
 
 // Quit when all windows are closed.
 electron.app.on('window-all-closed', () => {
@@ -26,9 +28,18 @@ electron.app.on("ready", () => {
 
     mainWindow.loadURL('file://' + __dirname + '/views/chat.html');
     registerWindow.loadURL('file://' + __dirname + '/views/register.html');
+    mainWindow.on('closed', () => {
+        rimraf(__dirname + '/../tmp2', (err) => {
+            if (err) console.error(err);
+        });
+        // fs.stat(__dirname + '/../tmp/data.json', (err, stat) => {
+        //     if (err) console.error(err);
+        //     fs.unlinkSync(__dirname + '/../tmp/data.json');
+        // });
+    });
 
     electron.ipcMain.on('loadWindow', (event, arg) => {
-        switch(arg) {
+        switch (arg) {
             case 1:
                 mainWindow.hide();
                 registerWindow.show();
@@ -38,13 +49,22 @@ electron.app.on("ready", () => {
                 mainWindow.show();
                 break;
             case 3:
-                registerWindow.hide();
                 mainWindow.loadURL('file://' + __dirname + '/views/chat.html');
-                mainWindow.show();
                 break;
             default:
                 registerWindow.hide();
                 mainWindow.show();
+        }
+    });
+
+    electron.ipcMain.on('updateFile', (event, arg) => {
+        switch (arg.type) {
+            case "rooms":
+                fs.writeFile(__dirname + '/../tmp/rooms.json', JSON.stringify({"rooms": arg.data}, null, 4));
+                break;
+            case "users":
+                fs.writeFile(__dirname + '/../tmp/users.json', JSON.stringify({"users": arg.data}, null, 4));
+                break;
         }
     });
 });
