@@ -29,9 +29,19 @@ class Room extends React.Component <RoomProps, RoomState> {
         });
     }
 
+    openRoom(ev) {
+        var data = {
+            "key": this.state.key,
+            "name": this.state.name
+        };
+
+        ipcRenderer.send('updateFile', {"data": data, "type": "room"});
+        ipcRenderer.send('loadWindow', 4);
+    }
+
     render() {
         return (
-            <a href="#">{this.state.name}</a>
+            <a href="#" onClick={this.openRoom.bind(this)}>{this.state.name}</a>
         );
     }
 }
@@ -111,7 +121,7 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
                 <li>
                     <Icon>home</Icon>
                     <label><Room key={room.key} name={room.name}/></label>
-                    <label className="exit" onClick={this.removeRoom.bind(this, index)}>X</label>
+                    <label className="exit" onClick={this.removeRoom.bind(this, index)}>  X</label>
                 </li>
             );
         });

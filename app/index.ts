@@ -51,6 +51,9 @@ electron.app.on("ready", () => {
             case 3:
                 mainWindow.loadURL('file://' + __dirname + '/views/chat.html');
                 break;
+            case 4:
+                mainWindow.loadURL('file://' + __dirname + '/views/room.html');
+                break;
             default:
                 registerWindow.hide();
                 mainWindow.show();
@@ -62,8 +65,14 @@ electron.app.on("ready", () => {
             case "rooms":
                 fs.writeFile(__dirname + '/../tmp/rooms.json', JSON.stringify({"rooms": arg.data}, null, 4));
                 break;
+            case "room":
+                fs.writeFile(__dirname + '/../tmp/room.json', JSON.stringify({"room": arg.data}, null, 4));
+                break;
             case "users":
                 fs.writeFile(__dirname + '/../tmp/users.json', JSON.stringify({"users": arg.data}, null, 4));
+                break;
+            case "user":
+                fs.writeFile(__dirname + '/../tmp/data.json', JSON.stringify({"user": arg.data}, null, 4));
                 break;
         }
     });

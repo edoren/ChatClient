@@ -84,6 +84,11 @@ ul li {
   z-index: 0;
 }
 
+#exit {
+  position: absolute;
+  bottom: 180px;
+}
+
 @media screen and (min-height: 550px) {
   .fix-chat {
     overflow-y: scroll;

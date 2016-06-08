@@ -15,7 +15,6 @@ $(function() {
             "password": $('#password').val()
         };
 
-        //alert(JSON.stringify(data));
         var socket = SocketConnection.getInstance();
 
         socket.on("receive", function(msg) {
@@ -27,18 +26,16 @@ $(function() {
                     alert("Los datos ingresados no son correctos!");
                 }
                 else {
-                    var user = {"user": data.user};
-                    var rooms = {
-                        "rooms": [
-                            { key: 1, name: "Room A" },
-                            { key: 2, name: "Room B" },
-                            { key: 3, name: "Room C" }
-                        ]
-                    };
+                    var user = data.user;
+                    var rooms = [
+                        { key: 1, name: "Room A" },
+                        { key: 2, name: "Room B" },
+                        { key: 3, name: "Room C" }
+                    ];
 
                     ipcRenderer.send('loadWindow', 3);
-                    fs.writeFile('./tmp/data.json', JSON.stringify(user, null, 4));
-                    fs.writeFile('./tmp/rooms.json', JSON.stringify(rooms, null, 4));
+                    ipcRenderer.send('updateFile', {"data": rooms, "type": "rooms"});
+                    ipcRenderer.send('updateFile', {"data": user, "type": "user"});
                 }
 
                 console.log("Respuesta para:", connect.MessageType[msg.content.msg_id]);

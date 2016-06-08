@@ -5,7 +5,9 @@ import {UserList, RoomList, Room} from './components';
 import * as $ from 'jquery';
 
 var users_data = [];
+var users_room_data = [];
 var rooms_data = [];
+var room_data;
 
 $(function() {
     $.getJSON('../../tmp/rooms.json', (data) => {
@@ -14,10 +16,6 @@ $(function() {
             <RoomList data={rooms_data}/>,
             document.getElementById('rooms')
         );
-        // ReactDOM.render(
-        //     <Room data={rooms_data}/>,
-        //     document.getElementById('room')
-        // );
     });
 
     $.getJSON('../../tmp/users.json', (data) => {
@@ -25,6 +23,22 @@ $(function() {
         ReactDOM.render(
             <UserList data={users_data}/>,
             document.getElementById('users')
+        );
+    });
+
+    $.getJSON('../../tmp/room.json', (data) => {
+        room_data = data.room;
+        ReactDOM.render(
+            <Room key={room_data.key} name={room_data.name}/>,
+            document.getElementById('room')
+        );
+    });
+
+    $.getJSON('../../tmp/users_room.json', (data) => {
+        users_room_data = data.users;
+        ReactDOM.render(
+            <UserList data={users_room_data}/>,
+            document.getElementById('usersRoom')
         );
     });
 });
