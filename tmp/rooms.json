@@ -1,8 +1,24 @@
 {
     "rooms": [
         {
-            "owner": "carogomezt",
-            "name": "hola"
+            "name": "misala",
+            "owner": "carogomezt"
+        },
+        {
+            "name": "sasharoom",
+            "owner": "carogomezt"
+        },
+        {
+            "name": "club10",
+            "owner": "carogomezt"
+        },
+        {
+            "name": "hola",
+            "owner": "carogomezt"
+        },
+        {
+            "name": "robocot",
+            "owner": "carogomezt"
         }
     ]
 }

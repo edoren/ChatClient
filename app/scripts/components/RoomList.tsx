@@ -167,7 +167,7 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
             <div>
                 <div className>
                     <ul>{rooms}</ul>
-                    <input type="text" placeholder="Room Name" value={this.state.tmp} onChange={this.editName.bind(this)}/>
+                    <input type="text" placeholder="Room Name" className="placeholderColor" value={this.state.tmp} onChange={this.editName.bind(this)}/>
                 </div>
                 <div className="row center">
                     <Button onClick={this.addRoom.bind(this)} className="waves-effect waves-light bottonColor">ADD</Button>
