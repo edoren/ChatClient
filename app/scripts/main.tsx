@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 import * as connect from "./connect";
 import {UserList, RoomList, Room} from './components';
 import * as $ from 'jquery';
+import {ipcRenderer, remote} from 'electron';
 
 var users_data = [];
 var users_room_data = [];
@@ -40,6 +41,42 @@ $(function() {
             <UserList data={users_room_data}/>,
             document.getElementById('usersRoom')
         );
+    });
+
+    var socket = remote.getGlobal("socket");
+
+    socket.on('receive', (msg) => {
+        if (msg.type == connect.MessageType.DELETE_ROOM) {
+            $.getJSON('../../tmp/rooms.json', (room) => {
+                var name = msg.content.name;
+                var index = -1;
+                var rooms = room.rooms;
+
+                for (var i = 0; i < rooms.length; i++) {
+                    if (rooms[i].name == name) {
+                        index = i;
+                        break;
+                    }
+                }
+
+                if (index != -1) {
+                    rooms.splice(index, 1);
+                    ipcRenderer.send('updateFile', {"data": rooms, "type": "rooms"});
+                }
+            });
+        }
+
+        else if(msg.type == connect.MessageType.NEW_ROOM) {
+            $.getJSON('../../tmp/rooms.json', (room) => {
+                var rooms = room.rooms;
+                var tmp = {
+                    "owner": msg.content.owner,
+                    "name": msg.content.name
+                };
+                rooms.push(tmp);
+                ipcRenderer.send('updateFile', {"data": rooms, "type": "rooms"});
+            });
+        }
     });
 });
 

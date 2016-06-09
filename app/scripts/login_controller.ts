@@ -16,7 +16,7 @@ function LoginReceiver(msg) {
                 ipcRenderer.send('loadWindow', 2);
                 alert("Los datos ingresados no son correctos!");
             }
-            else {
+            else if(msg.content.code == connect.ResponseCode.OK) {
                 var rooms = {"rooms": msg.content.content};
 
                 ipcRenderer.send('loadWindow', 3);

@@ -1,7 +1,6 @@
 import * as connect from './connect';
 import * as $ from 'jquery';
 import {ipcRenderer, remote} from 'electron';
-import {SocketConnection} from './socket_connection';
 
 var socket = remote.getGlobal("socket");
 

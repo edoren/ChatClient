@@ -77,31 +77,50 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
 
     removeRoom(index: number) {
         var data = this.state.data;
+        $.getJSON('../../tmp/data.json', (room) => {
+            var name = {
+                "owner": room.user,
+                "name": data[index].name
+            }
+            var msg = new connect.Message(connect.MessageType.REMOVE_ROOM, name);
+            socket.Send(msg);
 
-        var msg = new connect.Message(connect.MessageType.REMOVE_ROOM, data[0]);
-        socket.Send(msg);
+            socket.once('receive', (msg) => {
+                if (msg.type == connect.MessageType.RESPONSE) {
+                    if (msg.content.type == connect.MessageType.REMOVE_ROOM) {
+                        if (msg.content.code == connect.ResponseCode.OK) {
+                            data.splice(index, 1);
 
-        socket.once('receive', (msg) => {
-            if (msg.type == connect.MessageType.RESPONSE) {
-                if (msg.content.type == connect.MessageType.REMOVE_ROOM) {
-                    if (msg.content.code == connect.ResponseCode.OK) {
-                        data.splice(index, 1);
+                            this.setState({
+                                data: data
+                            });
 
-                        this.setState({
-                            data: data
-                        });
-
-                        //ipcRenderer.send('updateFile', {"data": data, "type": "rooms"});
-                        alert(JSON.stringify(data));
-                        fs.writeFileSync('../../tmp/rooms.json', JSON.stringify({"rooms": data}, null, 4));
-                    }
-                    else {
-                        alert("No tienes permisos para borrar esta sala!");
+                            ipcRenderer.send('updateFile', {"data": data, "type": "rooms"});
+                            //alert(JSON.stringify(data));
+                        }
+                        else {
+                            alert("No tienes permisos para borrar esta sala!");
+                        }
                     }
                 }
-            }
+            });
         });
+
         //ipcRenderer.send('updateFile', {"data": this.state.data, "type": "rooms"});
+    }
+
+    update(ev) {
+        // socket.on('receive', (msg) => {
+        //     if (msg.type == connect.MessageType.NEW_ROOM) {
+        //         var newRoom = msg.content;
+        //         var rooms = this.state.data;
+        //         rooms.push(newRoom);
+        //
+        //         this.setState({
+        //             data: rooms
+        //         });
+        //     }
+        // });
     }
 
     addRoom(ev) {
@@ -167,7 +186,7 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
 
         return (
             <div>
-                <div className>
+                <div onChange={this.update.bind(this)}>
                     <ul>{rooms}</ul>
                     <input type="text" placeholder="Room Name" value={this.state.tmp} onChange={this.editName.bind(this)}/>
                 </div>
