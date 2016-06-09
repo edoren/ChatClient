@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Button, Icon} from 'react-materialize';
-import {ipcRenderer} from 'electron';
+import {ipcRenderer, remote} from 'electron';
 
 interface RoomProps {
     owner: string;
