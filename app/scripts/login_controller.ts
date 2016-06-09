@@ -21,7 +21,7 @@ function LoginReceiver(msg) {
                 fs.writeFile(__dirname + '/../../tmp/rooms.json', JSON.stringify(rooms, null, 4));
                 //ipcRenderer.send('updateFile', {"data": msg.content.content, "type": "rooms"});
             }
-        }
+         }
 
         console.log("Respuesta para:", connect.MessageType[msg.content.type]);
         console.log("Codigo de respuesta:", connect.ResponseCode[msg.content.code]);

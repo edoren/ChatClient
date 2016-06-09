@@ -5,7 +5,8 @@ import * as rimraf from 'rimraf';
 import {SocketManager} from "./scripts/connect";
 
 var socket = new SocketManager();
-socket.Connect("190.128.55.241", 9999);
+//190.128.55.241;
+socket.Connect("10.253.109.5", 9999);
 global["socket"] = socket;
 
 // Quit when all windows are closed.
@@ -32,7 +33,7 @@ electron.app.on("ready", () => {
         "show": false
     });
 
-    mainWindow.loadURL('file://' + __dirname + '/views/chat.html');
+    mainWindow.loadURL('file://' + __dirname + '/views/login.html');
     registerWindow.loadURL('file://' + __dirname + '/views/register.html');
     mainWindow.on('closed', () => {
         rimraf(__dirname + '/../tmp2', (err) => {
@@ -41,7 +42,6 @@ electron.app.on("ready", () => {
     });
 
     electron.ipcMain.on('loadWindow', (event, arg) => {
-        socket.removeAllListeners("receive");
         switch (arg) {
             case 1:
                 mainWindow.hide();
@@ -61,6 +61,7 @@ electron.app.on("ready", () => {
                 registerWindow.hide();
                 mainWindow.show();
         }
+        socket.removeAllListeners("receive");
     });
 
     electron.ipcMain.on('updateFile', (event, arg) => {
