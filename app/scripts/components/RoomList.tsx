@@ -1,15 +1,20 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Button, Icon} from 'react-materialize';
-import {ipcRenderer} from 'electron';
+import {ipcRenderer, remote} from 'electron';
+import * as $ from 'jquery';
+import * as connect from '../connect';
+import * as fs from 'fs';
+
+var socket = remote.getGlobal("socket");
 
 interface RoomProps {
-    key: number;
+    owner: string;
     name: string;
 }
 
 interface RoomState {
-    key?: number;
+    owner?: string;
     name?: string;
 }
 
@@ -17,21 +22,21 @@ class Room extends React.Component <RoomProps, RoomState> {
     constructor(props) {
         super(props);
         this.state = {
-            key: this.props.key,
+            owner: this.props.owner,
             name: this.props.name
         };
     }
 
     componentDidMount() {
         this.setState({
-            key: this.props.key,
+            owner: this.props.owner,
             name: this.props.name
         });
     }
 
     openRoom(ev) {
         var data = {
-            "key": this.state.key,
+            "owner": this.state.owner,
             "name": this.state.name
         };
 
@@ -72,41 +77,73 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
 
     removeRoom(index: number) {
         var data = this.state.data;
-        data.splice(index, 1);
 
-        this.setState({
-            data: data
+        var msg = new connect.Message(connect.MessageType.REMOVE_ROOM, data[0]);
+        socket.Send(msg);
+
+        socket.once('receive', (msg) => {
+            if (msg.type == connect.MessageType.RESPONSE) {
+                if (msg.content.type == connect.MessageType.REMOVE_ROOM) {
+                    if (msg.content.code == connect.ResponseCode.OK) {
+                        data.splice(index, 1);
+
+                        this.setState({
+                            data: data
+                        });
+
+                        //ipcRenderer.send('updateFile', {"data": data, "type": "rooms"});
+                        // fs.writeFileSync('../../tmp/rooms.json', JSON.stringify({"rooms": data}, null, 4));
+                    }
+                    else {
+                        alert("No tienes permisos para borrar esta sala!");
+                    }
+                }
+            }
         });
     }
 
     addRoom(ev) {
-        var data = this.state.data;
-        var name = this.state.tmp;
-        var id = Math.floor(Math.random() * 100);
-        name = (name == "")? "Room " + (id).toString() : name;
-        var ok = true;
+        $.getJSON('../../tmp/data.json', (user) => {
+            var user = user.user;
+            var data = this.state.data;
+            var name = this.state.tmp;
+            var ok = true;
 
-        data.forEach(function(room) {
-            if (room.name == name) {
-                alert(`Ya existe una sala con el nombre "${name}", por favor elige otro nombre`);
+            data.forEach(function(room) {
+                if (room.name == name && name.length > 0) {
+                    alert(`Ya existe una sala con el nombre "${name}", por favor elige otro nombre`);
+                    ok = false;
+                    return;
+                }
+            });
+
+            if (this.state.tmp.length == 0) {
                 ok = false;
+                alert("Por favor lleva el campo!");
                 return;
             }
+
+            if (ok) {
+                data.push({
+                    owner: user,
+                    name: name
+                });
+
+                this.setState({
+                    data: data,
+                    tmp: ""
+                });
+
+                var room = {
+                    "owner": user,
+                    "name": name
+                };
+
+                var msg = new connect.Message(connect.MessageType.CREATE_ROOM, room);
+                socket.Send(msg);
+                ipcRenderer.send('updateFile', {"data": data, "type": "rooms"});
+            }
         });
-
-        if (ok) {
-            data.push({
-                key: id,
-                name: name
-            });
-
-            this.setState({
-                data: data,
-                tmp: ""
-            });
-
-            ipcRenderer.send('updateFile', {"data": data, "type": "rooms"});
-        }
     }
 
     editName(ev) {
@@ -120,8 +157,8 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
             return (
                 <li>
                     <Icon>home</Icon>
-                    <label><Room key={room.key} name={room.name}/></label>
-                    <label className="exit" onClick={this.removeRoom.bind(this, index)}>  X</label>
+                    <label><Room owner={room.owner} name={room.name}/>  </label>
+                    <label className="exit" onClick={this.removeRoom.bind(this, index)}>X</label>
                 </li>
             );
         });

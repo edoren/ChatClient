@@ -5,6 +5,9 @@ export enum MessageType {
     CREATE_ROOM = 3,
     REMOVE_ROOM = 4,
     RESPONSE = 100,
+    NEW_ROOM = 110,
+    NEW_CHAT = 111,
+    DELETE_ROOM = 112,
     SERVER_CLOSE = 200
 }
 

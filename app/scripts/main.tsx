@@ -29,7 +29,7 @@ $(function() {
     $.getJSON('../../tmp/room.json', (data) => {
         room_data = data.room;
         ReactDOM.render(
-            <Room key={room_data.key} name={room_data.name}/>,
+            <Room owner={room_data.owner} name={room_data.name}/>,
             document.getElementById('room')
         );
     });

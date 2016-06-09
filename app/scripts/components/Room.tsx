@@ -4,12 +4,12 @@ import {Button, Icon} from 'react-materialize';
 import {ipcRenderer} from 'electron';
 
 interface RoomProps {
-    key: number;
+    owner: string;
     name: string;
 }
 
 interface RoomState {
-    key?: number;
+    owner?: string;
     name?: string;
 }
 
@@ -17,14 +17,14 @@ export class Room extends React.Component <RoomProps, RoomState> {
     constructor(props) {
         super(props);
         this.state = {
-            key: this.props.key,
+            owner: this.props.owner,
             name: this.props.name
         };
     }
 
     componentDidMount() {
         this.setState({
-            key: this.props.key,
+            owner: this.props.owner,
             name: this.props.name
         });
     }

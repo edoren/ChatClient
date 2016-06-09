@@ -1,60 +1,8 @@
 {
     "rooms": [
         {
-            "key": 1,
-            "name": "Room A"
-        },
-        {
-            "key": 2,
-            "name": "Room B"
-        },
-        {
-            "key": 3,
-            "name": "Room C"
-        },
-        {
-            "key": 4,
-            "name": "Room X"
-        },
-        {
-            "key": 89,
-            "name": "Test"
-        },
-        {
-            "key": 86,
-            "name": "Distribuidos"
-        },
-        {
-            "key": 22,
-            "name": "Room 22"
-        },
-        {
-            "key": 81,
-            "name": "Room 81"
-        },
-        {
-            "key": 36,
-            "name": "Room 36"
-        },
-        {
-            "key": 5,
-            "name": "Room 5"
-        },
-        {
-            "key": 80,
-            "name": "Room 80"
-        },
-        {
-            "key": 30,
-            "name": "Room 30"
-        },
-        {
-            "key": 38,
-            "name": "Room 38"
-        },
-        {
-            "key": 33,
-            "name": "Room 33"
+            "name": "kk",
+            "owner": "sebas095"
         }
     ]
 }

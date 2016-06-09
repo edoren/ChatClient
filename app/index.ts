@@ -2,6 +2,12 @@ import * as electron from 'electron';  // Module to control application life.
 import * as fs from 'fs';
 import * as rimraf from 'rimraf';
 
+import {SocketManager} from "./scripts/connect";
+
+var socket = new SocketManager();
+socket.Connect("190.128.55.241", 9999);
+global["socket"] = socket;
+
 // Quit when all windows are closed.
 electron.app.on('window-all-closed', () => {
     if (process.platform != "darwin") {
@@ -32,13 +38,10 @@ electron.app.on("ready", () => {
         rimraf(__dirname + '/../tmp2', (err) => {
             if (err) console.error(err);
         });
-        // fs.stat(__dirname + '/../tmp/data.json', (err, stat) => {
-        //     if (err) console.error(err);
-        //     fs.unlinkSync(__dirname + '/../tmp/data.json');
-        // });
     });
 
     electron.ipcMain.on('loadWindow', (event, arg) => {
+        socket.removeAllListeners("receive");
         switch (arg) {
             case 1:
                 mainWindow.hide();
@@ -63,6 +66,7 @@ electron.app.on("ready", () => {
     electron.ipcMain.on('updateFile', (event, arg) => {
         switch (arg.type) {
             case "rooms":
+                //console.log(JSON.stringify(arg, null, 4));
                 fs.writeFile(__dirname + '/../tmp/rooms.json', JSON.stringify({"rooms": arg.data}, null, 4));
                 break;
             case "room":
