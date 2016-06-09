@@ -18,7 +18,7 @@ $(function() {
         );
     });
 
-    $.getJSON('../../tmp/users.json', (data) => {
+    $.getJSON('../../test/users.json', (data) => {
         users_data = data.users;
         ReactDOM.render(
             <UserList data={users_data}/>,
@@ -34,7 +34,7 @@ $(function() {
         );
     });
 
-    $.getJSON('../../tmp/users_room.json', (data) => {
+    $.getJSON('../../test/users_room.json', (data) => {
         users_room_data = data.users;
         ReactDOM.render(
             <UserList data={users_room_data}/>,
