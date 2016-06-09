@@ -6,7 +6,17 @@ html, body {
   padding: 0;
   font-size: 17px;
   background-color: white;
-  font-family: 'Exo', sans-serif;;
+  font-family: 'Exo', sans-serif;
+}
+
+@font-face {
+  font-family: Exo;
+  src: url(./fonts/Exo/Exo-Regular.ttf);
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(./fonts/Montserrat/Montserrat-Bold.ttf);
 }
 
 /* fallback */
@@ -51,12 +61,12 @@ html, body {
 }
 
 .exit {
-  color: #b71c1c;
+  color: #c62828;
   font-weight: bold;
 }
 
 .exit:hover {
-  color: gray;
+  color: #b71c1c;
 }
 
 ul li {
@@ -65,16 +75,21 @@ ul li {
 }
 
 #chat li:nth-child(odd) {
-  background-color: #E0F7FA;
+  background-color: #e0f7fa;
+  color: #006064;
 }
 
 #chat li:nth-child(even) {
-  background-color: #B2DFDB;
+  background-color: #80deea;
+  color: #006064;
 }
 
 .bold {
   font-weight: bold;
-  font-family: 'Exo', sans-serif;;
+  font-family: Montserrat;
+  font-size: 24px;
+  text-align: center;
+  color: #006064;
 }
 
 .fix {
@@ -93,12 +108,37 @@ ul li {
   background-color: #0097a7;
 }
 
+.iconsColor {
+  color: #0097a7;
+}
+
+.bottonColor:hover {
+  background-color: #00838f;
+}
+
 .textColor {
-  color: #006064;
+  color:#004d40;
 }
 
 .roomColor {
   color: #00838f;
+}
+
+.placeholderColor {
+  color: #00838f;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #00acc1;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #00acc1;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #00acc1;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #00acc1;
 }
 #exit {
   position: absolute;
