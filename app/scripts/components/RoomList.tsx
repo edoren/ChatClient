@@ -162,7 +162,6 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
 
                 var msg = new connect.Message(connect.MessageType.CREATE_ROOM, room);
                 socket.Send(msg);
-                ipcRenderer.send('updateFile', {"data": data, "type": "rooms"});
             }
         });
     }

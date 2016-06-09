@@ -51,18 +51,16 @@ $(function() {
                 var name = msg.content.name;
                 var index = -1;
                 var rooms = room.rooms;
+                var tmp = [];
 
                 for (var i = 0; i < rooms.length; i++) {
-                    if (rooms[i].name == name) {
-                        index = i;
-                        break;
+                    if (rooms[i].name != name) {
+                        tmp.push(rooms[i]);
                     }
                 }
 
-                if (index != -1) {
-                    rooms.splice(index, 1);
-                    ipcRenderer.send('updateFile', {"data": rooms, "type": "rooms"});
-                }
+                alert(JSON.stringify(tmp));
+                ipcRenderer.send('updateFile', {"data": tmp, "type": "rooms"});
             });
         }
 
