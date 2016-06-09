@@ -10,7 +10,7 @@ socket.on("receive", function(msg) {
         console.log("Respuesta para:", connect.MessageType[msg.content.type]);
         console.log("Codigo de respuesta:", connect.ResponseCode[msg.content.code]);
     }
-    else if (msg.type == connect.MessageType.NEW_CHAT) {
+    else if (msg.type == connect.MessageType.NEW_CHAT && msg.content.room == 'default') {
         $('#chat').append(`<li><b>${msg.content.user}: </b>${msg.content.message}</li>`);
     }
 });

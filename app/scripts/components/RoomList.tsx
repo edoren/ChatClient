@@ -92,7 +92,8 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
                         });
 
                         //ipcRenderer.send('updateFile', {"data": data, "type": "rooms"});
-                        // fs.writeFileSync('../../tmp/rooms.json', JSON.stringify({"rooms": data}, null, 4));
+                        alert(JSON.stringify(data));
+                        fs.writeFileSync('../../tmp/rooms.json', JSON.stringify({"rooms": data}, null, 4));
                     }
                     else {
                         alert("No tienes permisos para borrar esta sala!");
@@ -100,6 +101,7 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
                 }
             }
         });
+        //ipcRenderer.send('updateFile', {"data": this.state.data, "type": "rooms"});
     }
 
     addRoom(ev) {

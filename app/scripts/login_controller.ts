@@ -7,6 +7,8 @@ var socket = remote.getGlobal("socket");
 
 function LoginReceiver(msg) {
     console.log(msg);
+    $("#user").prop('disabled', true);
+    $("#password").prop('disabled', true);
     //alert(JSON.stringify(msg));
     if (msg.type == connect.MessageType.RESPONSE) {
         if (msg.content.type == connect.MessageType.LOGIN) {

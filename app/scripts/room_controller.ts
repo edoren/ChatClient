@@ -12,7 +12,10 @@ socket.on("receive", function(msg) {
         console.log("Codigo de respuesta:", connect.ResponseCode[msg.content.code]);
     }
     else if (msg.type == connect.MessageType.NEW_CHAT) {
-        $('#chat').append(`<li><b>${msg.content.user}: </b>${msg.content.message}</li>`);
+        $.getJSON('../../tmp/room.json', (data) => {
+            if (data.room.name == msg.content.room)
+                $('#chat').append(`<li><b>${msg.content.user}: </b>${msg.content.message}</li>`);
+        });
     }
 });
 
