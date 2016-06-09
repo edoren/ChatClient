@@ -36,7 +36,7 @@ electron.app.on("ready", () => {
     mainWindow.loadURL('file://' + __dirname + '/views/login.html');
     registerWindow.loadURL('file://' + __dirname + '/views/register.html');
     mainWindow.on('closed', () => {
-        rimraf(__dirname + '/../tmp2', (err) => {
+        rimraf(__dirname + '/../tmp', (err) => {
             if (err) console.error(err);
         });
     });

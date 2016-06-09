@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "rm -rf tmp2 & mkdir tmp2",
+    "build": "rm -rf tmp & mkdir tmp",
     "start": " npm run build && gulp start",
     "install": "rm -rf typings && typings install",
     "debug": "gulp debug",
