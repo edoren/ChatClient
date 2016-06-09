@@ -38,11 +38,11 @@ export class Room extends React.Component <RoomProps, RoomState> {
         return (
             <div>
                 <div className>
-                    <Icon>account_balance</Icon>
-                    <label>{this.state.name}</label>
+                    <Icon className="roomColor">account_balance &nbsp;&nbsp;</Icon>
+                    <label className="roomColor">{this.state.name}</label>
                 </div>
                 <div className="row center" id="exit">
-                    <Button onClick={this.exitRoom.bind(this)} className="waves-effect waves-light">EXIT ROOM</Button>
+                    <Button onClick={this.exitRoom.bind(this)} className="waves-effect waves-light bottonColor">EXIT ROOM</Button>
                 </div>
             </div>
         );

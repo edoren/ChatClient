@@ -46,7 +46,7 @@ class Room extends React.Component <RoomProps, RoomState> {
 
     render() {
         return (
-            <a href="#" onClick={this.openRoom.bind(this)}>{this.state.name}</a>
+            <a href="#" className="roomColor" onClick={this.openRoom.bind(this)}>{this.state.name}</a>
         );
     }
 }
@@ -158,8 +158,8 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
         var rooms = this.state.data.map((room, index) => {
             return (
                 <li>
-                    <Icon>home</Icon>
-                    <label><Room owner={room.owner} name={room.name}/>  </label>
+                    <Icon className="roomColor">home &nbsp;&nbsp;</Icon>
+                    <label><Room owner={room.owner} name={room.name}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <label className="exit" onClick={this.removeRoom.bind(this, index)}>X</label>
                 </li>
             );
@@ -172,7 +172,7 @@ export class RoomList extends React.Component <RoomListProps, RoomListState> {
                     <input type="text" placeholder="Room Name" value={this.state.tmp} onChange={this.editName.bind(this)}/>
                 </div>
                 <div className="row center">
-                    <Button onClick={this.addRoom.bind(this)} className="waves-effect waves-light">ADD</Button>
+                    <Button onClick={this.addRoom.bind(this)} className="waves-effect waves-light bottonColor">ADD</Button>
                 </div>
             </div>
         );
