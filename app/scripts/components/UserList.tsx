@@ -30,7 +30,7 @@ class User extends React.Component <UserProps, UserState> {
 
     render() {
         return (
-            <a href="#">{this.state.name}  </a>
+            <a href="#" className="roomColor">{this.state.name}  </a>
         );
     }
 }
@@ -92,7 +92,7 @@ export class UserList extends React.Component <UserListProps, UserListState> {
         var users = this.state.data.map((user, index) => {
             return (
                 <li>
-                    <Icon>account_circle</Icon>&nbsp;
+                    <Icon className="roomColor">account_circle</Icon>&nbsp;
                     <User key={user.key} name={user.name}/>
                 </li>
             );

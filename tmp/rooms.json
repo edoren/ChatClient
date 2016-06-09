@@ -1,3 +1,8 @@
 {
-    "rooms": []
+    "rooms": [
+        {
+            "owner": "carogomezt",
+            "name": "hola"
+        }
+    ]
 }

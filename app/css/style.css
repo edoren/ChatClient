@@ -6,7 +6,7 @@ html, body {
   padding: 0;
   font-size: 17px;
   background-color: white;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Exo', sans-serif;;
 }
 
 /* fallback */
@@ -51,7 +51,8 @@ html, body {
 }
 
 .exit {
-  color: black;
+  color: #b71c1c;
+  font-weight: bold;
 }
 
 .exit:hover {
@@ -73,7 +74,7 @@ ul li {
 
 .bold {
   font-weight: bold;
-  font-family: black;
+  font-family: 'Exo', sans-serif;;
 }
 
 .fix {
@@ -84,6 +85,21 @@ ul li {
   z-index: 0;
 }
 
+.blueColor {
+  background-color: #80deea;
+}
+
+.bottonColor {
+  background-color: #0097a7;
+}
+
+.textColor {
+  color: #006064;
+}
+
+.roomColor {
+  color: #00838f;
+}
 #exit {
   position: absolute;
   bottom: 180px;
